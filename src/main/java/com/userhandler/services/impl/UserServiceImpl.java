@@ -9,6 +9,8 @@ import com.userhandler.exception.ResourceNotFoundException;
 import com.userhandler.mapper.UserMapper;
 import com.userhandler.repositories.UserRepositories;
 import com.userhandler.services.UserService;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import lombok.AllArgsConstructor;
 
@@ -32,4 +34,12 @@ public class UserServiceImpl implements  UserService {
         
         return UserMapper.maptoUserDto(user);
     }
+    @Override
+    public List<UserDto> getAllUsers() {
+        List<User> users = userRepositories.findAll();
+        return users.stream()
+            .map(UserMapper::maptoUserDto)  
+            .collect(Collectors.toList()); 
+    }
+
 }

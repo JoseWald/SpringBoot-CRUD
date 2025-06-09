@@ -1,5 +1,7 @@
 package com.userhandler.controllers;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,5 +34,10 @@ public class UserController {
         return new ResponseEntity<>(userDto , HttpStatus.OK);
     }
 
+    @GetMapping
+    public ResponseEntity<List<UserDto>> getAllUsers(){
+        List<UserDto> userDto = userService.getAllUsers();
+        return new ResponseEntity<>(userDto , HttpStatus.OK);
+    }
 
 }
