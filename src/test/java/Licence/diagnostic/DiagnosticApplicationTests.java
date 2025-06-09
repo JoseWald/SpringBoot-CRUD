@@ -1,13 +1,10 @@
 package Licence.diagnostic;
 
-import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class DiagnosticApplicationTests {
+import com.userhandler.UserHandler;
 
-	@Test
-	void contextLoads() {
-	}
-
+@SpringBootTest(classes = UserHandler.class)
+public class DiagnosticApplicationTests {
 }
+

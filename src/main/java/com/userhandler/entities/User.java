@@ -28,10 +28,10 @@ public class User {
     @Column(name="password",nullable=false)
     String password;
 
-    @Column(name="role")
-    Boolean isAdmin=false;//1:admin ; 0:employee
-
     @Column(name="photo_path")
     String photoPath;
+
+     @Column(name="role")
+    Boolean isAdmin=false;//1:admin ; 0:employee
 
 }
