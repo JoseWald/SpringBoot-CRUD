@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.userhandler.dto.UserDto;
 import com.userhandler.entities.User;
+import com.userhandler.exception.ResourceNotFoundException;
 import com.userhandler.mapper.UserMapper;
 import com.userhandler.repositories.UserRepositories;
 import com.userhandler.services.UserService;
@@ -22,5 +23,13 @@ public class UserServiceImpl implements  UserService {
         User user = UserMapper.maptoUser(userDto);
         User savedUser = userRepositories.save(user);
         return UserMapper.maptoUserDto(savedUser);
+    }
+
+    @Override
+    public UserDto getUserById(Long userId){
+        User user= userRepositories.findById(userId)
+                        .orElseThrow(() -> new ResourceNotFoundException("user not found"));
+        
+        return UserMapper.maptoUserDto(user);
     }
 }
