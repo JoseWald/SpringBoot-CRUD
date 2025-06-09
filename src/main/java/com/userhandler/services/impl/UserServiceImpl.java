@@ -1,6 +1,9 @@
 package com.userhandler.services.impl;
 
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Service;
 
 import com.userhandler.dto.UserDto;
@@ -9,8 +12,6 @@ import com.userhandler.exception.ResourceNotFoundException;
 import com.userhandler.mapper.UserMapper;
 import com.userhandler.repositories.UserRepositories;
 import com.userhandler.services.UserService;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import lombok.AllArgsConstructor;
 
@@ -58,5 +59,11 @@ public class UserServiceImpl implements  UserService {
         return UserMapper.maptoUserDto(updatedUser);
     }
 
-
+    @Override
+    public void deleteUser(Long Id){
+        User user= userRepositories.findById(Id)
+                        .orElseThrow(() -> new ResourceNotFoundException("user not found"));
+         userRepositories.deleteById(Id);
+        
+    }
 }
