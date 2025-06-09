@@ -42,4 +42,21 @@ public class UserServiceImpl implements  UserService {
             .collect(Collectors.toList()); 
     }
 
+    @Override
+    public UserDto updateUser(Long Id, UserDto userDto) {
+      User user = userRepositories.findById(Id)
+                    .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+
+
+        user.setName(userDto.getName());
+        user.setPassword(userDto.getPassword());
+        user.setPhotoPath(userDto.getPhotoPath());
+        user.setIsAdmin(userDto.getIsAdmin());
+    
+        User updatedUser = userRepositories.save(user);
+
+        return UserMapper.maptoUserDto(updatedUser);
+    }
+
+
 }
